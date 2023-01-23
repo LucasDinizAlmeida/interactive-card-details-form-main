@@ -1,7 +1,7 @@
-import { forwardRef, ForwardRefRenderFunction } from "react";
-import { FieldErrors, FieldValues } from "react-hook-form";
+import { forwardRef, ForwardRefRenderFunction, InputHTMLAttributes, useEffect } from "react";
+import { Control, FieldErrors, FieldValues, useController, UseFormWatch } from "react-hook-form";
 
-interface InputProps {
+interface InputProps extends InputHTMLAttributes<any> {
   placeholder: string;
   name: string;
   label: string;
