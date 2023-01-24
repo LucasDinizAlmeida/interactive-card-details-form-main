@@ -13,6 +13,7 @@ interface FormProps {
   handleSetYear: (value: string) => void;
   handleSetSecretCode: (value: string) => void;
   handleSetCardNumber: (value: string) => void;
+  handleOpenModal: () => void;
 }
 
 
@@ -28,7 +29,7 @@ const schema = yup.object({
 })
 
 
-export function Form({ handleSetMonth, handleSetUserName, handleSetYear, handleSetSecretCode, handleSetCardNumber }: FormProps) {
+export function Form({ handleSetMonth, handleSetUserName, handleSetYear, handleSetSecretCode, handleSetCardNumber, handleOpenModal }: FormProps) {
 
   const [isSubmitting, setIsSubmitting] = useState(false)
 
@@ -44,19 +45,13 @@ export function Form({ handleSetMonth, handleSetUserName, handleSetYear, handleS
   handleSetMonth(checkContent(watch('mouth'), 'month'))
   handleSetYear(checkContent(watch('year'), 'year'))
   handleSetSecretCode(checkContent(watch('code'), 'secretCode'))
-  // handleSetCardNumber({
-  //   n1: watch('cardNumber')?.slice(0, 4),
-  //   n2: watch('cardNumber')?.slice(4, 8),
-  //   n3: watch('cardNumber')?.slice(8, 12),
-  //   n4: watch('cardNumber')?.slice(12, 16)
-  // })
-
   handleSetCardNumber(watch('cardNumber'))
 
 
   const onSubmit: SubmitHandler<any> = async (data) => {
     setIsSubmitting(true)
     setTimeout(() => {
+      handleOpenModal()
       setIsSubmitting(false)
       console.log(data)
     }, 3000)

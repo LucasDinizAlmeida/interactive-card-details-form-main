@@ -2,16 +2,22 @@ import { Form } from "./components/Form"
 import { CardFront } from "./components/CardFront"
 import { CardBack } from "./components/CardBack"
 import { useState } from "react"
+import * as Dialog from '@radix-ui/react-dialog';
+import { Modal } from "./components/Modal";
 
 
 function App() {
 
+  const [open, setOpen] = useState(false)
   const [userName, setUserName] = useState('JAMES CLARK')
   const [month, setMonth] = useState('00')
   const [year, setYear] = useState('00')
   const [secretCode, setSecretCode] = useState('123')
   const [cardNumber, setCardNumber] = useState('')
 
+  function handleOpenModal() {
+    setOpen(true)
+  }
   function handleSetUserName(value: string) {
     setUserName(value)
   }
@@ -53,8 +59,13 @@ function App() {
           handleSetYear={handleSetYear}
           handleSetSecretCode={handleSetSecretCode}
           handleSetCardNumber={handleSetCardNumber}
+          handleOpenModal={handleOpenModal}
         />
       </div>
+
+      <Dialog.Root open={open} onOpenChange={setOpen}>
+        <Modal />
+      </Dialog.Root>
     </div>
   )
 }
